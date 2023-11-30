@@ -1,9 +1,12 @@
 from .models import Post, Comment
-from django.http import JsonResponse
 from .serializers import PostSerializer
 from django.db.models import Prefetch
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 
-def posts_list(request):
-    posts = Post.objects.all()
-    posts_serializer = PostSerializer(posts, many=True)
-    return JsonResponse({"posts" : posts_serializer.data})
+from rest_framework.viewsets import ReadOnlyModelViewSet
+
+class PostReadViewSet(ReadOnlyModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
