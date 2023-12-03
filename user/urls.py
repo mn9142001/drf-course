@@ -1,4 +1,4 @@
-from .views import SignupView, JWTLoginView, PasswordChangeView, PasswordResetVerifyView, PasswordResetSendView, PasswordResetConfirmView
+from .views import SignupView, JWTLoginView, PasswordChangeView, PasswordResetVerifyView, PasswordResetSendView, PasswordResetConfirmView, UserBlockView
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
 
@@ -19,4 +19,5 @@ auth_urls = [
 
 urlpatterns = [
     path('auth/', include(auth_urls)),
+    path('utils/block/', UserBlockView.as_view()),
 ]
