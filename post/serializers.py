@@ -12,8 +12,9 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    comment_set = CommentSerializer(many=True)
-    user = UserSerializer()
+    comment_set = CommentSerializer(many=True, read_only=True)
+    user = UserSerializer(read_only=True)
+    create_user = serializers.HiddenField(default=serializers.CurrentUserDefault(), source="user")
 
     class Meta:
         model = Post
@@ -21,3 +22,5 @@ class PostSerializer(serializers.ModelSerializer):
     
     def get_field_names(self, declared_fields, info):
         return super().get_field_names(declared_fields, info) + ['comment_set']
+    
+    
