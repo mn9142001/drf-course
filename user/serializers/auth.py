@@ -64,7 +64,7 @@ class SignUpSerializer(serializers.ModelSerializer):
 
 class PasswordSendResetSerializer(serializers.ModelSerializer):
     """send reset otp serializer"""
-    email = serializers.SlugRelatedField(slug_field="email", queryset=User.objects.all())
+    email = serializers.SlugRelatedField(slug_field="email", queryset=User.objects.all(), write_only=True, source="user")
 
     class Meta:
         model = OTP
